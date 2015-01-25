@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :musics
+  resources :artists
+
+ 	resources :users
+
+  resources :musics do
+  	member { post :like }
+  end
 
   resources :critiques
   get '/:username', :to => "profiles#show"

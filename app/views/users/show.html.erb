@@ -1,0 +1,15 @@
+<h1><%=@user.full_name%></h1>
+<p><%=image_tag @user.avatar.url(:medium) %>Find me in app/views/users/show.html.erb</p>
+<%=@user.username%>
+
+<h2>Critiques</h2>
+ <% @user.critiques.each do |critique| %>
+      <tr>
+        <td><%= critique.song %></td>
+        <td><%= critique.description %></td>
+        <td><%= critique.user_id %></td>
+        <td><%= link_to 'Show', critique %></td>
+        <td><%= link_to 'Edit', edit_critique_path(critique) %></td>
+        <td><%= link_to 'Destroy', critique, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>

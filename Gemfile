@@ -12,7 +12,7 @@ gem 'jquery-rails'
 gem 'paperclip'
 gem 'video_info'
 gem 'turbolinks'
-
+gem 'activerecord-reputation-system', require: 'reputation_system'
 gem 'jbuilder', '~> 2.0'
 
 gem 'sdoc', '~> 0.4.0',          group: :doc
