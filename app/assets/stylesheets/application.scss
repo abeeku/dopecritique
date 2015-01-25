@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+.navbar-pills li a:hover {
+	border-radius: 8px;
+}
+.navbar-right {
+float: right !important;
+margin-right: 8px;
+}
+.inline {
+	display: inline !important;
+}
