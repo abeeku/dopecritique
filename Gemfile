@@ -1,7 +1,15 @@
 source 'https://rubygems.org'
 gem 'rails', '4.1.8'
-gem 'sqlite3',        group: :development
-gem 'pg',        group: :production
+group :production do 
+	gem 'pg'
+end
+	group :development do 
+	gem 'sqlite3'
+end
+	
+end
+#gem 'sqlite3',        group: :development
+#gem 'pg',        group: :production
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
