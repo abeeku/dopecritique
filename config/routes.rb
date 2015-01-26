@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :critiques
-  get '/:username', :to => "profiles#show"
+  get '/:id', :to => "users#show"
   devise_for :users
   root 'critiques#index'
 
