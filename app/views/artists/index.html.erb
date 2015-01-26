@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>String</th>
       <th>Bio</th>
       <th colspan="3"></th>
     </tr>
@@ -12,7 +12,7 @@
   <tbody>
     <% @artists.each do |artist| %>
       <tr>
-        <td><%= artist.name %></td>
+        <td><%= artist.string %></td>
         <td><%= artist.bio %></td>
         <td><%= link_to 'Show', artist %></td>
         <td><%= link_to 'Edit', edit_artist_path(artist) %></td>
