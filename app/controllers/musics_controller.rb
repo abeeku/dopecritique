@@ -1,5 +1,5 @@
 class MusicsController < ApplicationController
-	
+	 respond_to :html, :xml, :json
 	def index
     @musics = Music.all
     respond_with(@musics)
@@ -18,7 +18,9 @@ class MusicsController < ApplicationController
   end
 
   def create
-    @music = Music.new(music_params)
+    @artist = Artist.find(params[:artist_id])
+    @music = Music.create(music_params)
+    @music.artist_id = @artist.id
     @music.save
     respond_with(@music)
   end

@@ -13,10 +13,10 @@
 			<%= link_to "2 Dope Critique",root_path %>
 		</div>
 		<ul class ="nav navbar-nav  nav-pills navbar-left">
-			<li><%=link_to "Music", new_critique_path%></li>
-			<li><%=link_to "Artists", new_critique_path%></li>
-			<li><%=link_to "Critics", new_critique_path%></li>
-			<li><%=link_to "Music", new_critique_path%></li>
+			<li><%=link_to "Music", musics_path%></li>
+			<li><%=link_to "Artists", artists_path%></li>
+			<li><%=link_to "Critics", users_path%></li>
+			
 
 		</ul>
 		<ul class ="nav navbar-nav  nav-pills navbar-right">
@@ -24,7 +24,7 @@
 		
 			<li><%=link_to "New Critique", new_critique_path%></li>
 
-			<li><%=image_tag current_user.avatar.url(:thumb), class: "inline"%><%=link_to "#{current_user.full_name}'s Profile", new_critique_path, class: "inline"%></li>
+			<li><%=image_tag current_user.avatar.url(:thumb), class: "inline"%><%=link_to "#{current_user.full_name}'s Profile", profile_path(current_user), class: "inline"%></li>
 			<li><%=link_to "Account", edit_user_registration_path%></li>
 			<li><%=link_to "Log Out", destroy_user_session_path, method: :delete%></li>
 
