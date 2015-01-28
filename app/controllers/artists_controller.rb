@@ -12,6 +12,11 @@ class ArtistsController < ApplicationController
     respond_with(@artist)
   end
 
+def like
+  @artistToLike = Artist.find(params[:id])
+  current_user.toggle_like!(@artistToLike)
+  redirect_to request.referrer
+end
   def new
     @artist = Artist.new
     respond_with(@artist)

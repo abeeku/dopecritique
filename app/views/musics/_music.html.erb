@@ -1,0 +1,14 @@
+<p><%= music.name%></p>
+<p><%= music.link%></p>
+<p><%=pluralize(music.likers(User).count, "like")%></p>
+<% if user_signed_in?  %>
+	<%if current_user.likes?(music) %>
+		<%= link_to 'Unlike',like_artist_music_path(@artist,music),method: :post, class: "glyphicon glyphicon-thumbs-up" %>
+	<% else %>
+		<%= link_to 'Like',like_artist_music_path(@artist,music),method: :post, class: "glyphicon glyphicon-thumbs-up" %>
+	<% end %>
+<% else %>
+<%= link_to "Sign in to like this song", new_user_session_path %>
+<% end %>
+
+<%= link_to "Delete", artist_music_path(@artist, music.id),method: :delete,data: {confirm: "Are you sure?" } %>

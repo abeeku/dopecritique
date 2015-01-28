@@ -13,7 +13,7 @@
 			<%= link_to "2 Dope Critique",root_path %>
 		</div>
 		<ul class ="nav navbar-nav  nav-pills navbar-left">
-			<li><%=link_to "Music", musics_path%></li>
+			<li><%=link_to "Music", "#"%></li>
 			<li><%=link_to "Artists", artists_path%></li>
 			<li><%=link_to "Critics", users_path%></li>
 			
@@ -38,8 +38,8 @@
 <% flash.each do |name, msg| %>
 	<%= content_tag :div, msg, class: "alert alert-info" %>
 <% end %>
-
+<div id="container">
 <%= yield %>
-
+</div>
 </body>
 </html>

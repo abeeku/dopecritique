@@ -12,8 +12,14 @@ class CritiquesController < ApplicationController
     respond_with(@critique)
   end
 
+def like
+  @critiqueToLike = Critique.find(params[:id])
+  current_user.toggle_like!(@critiqueToLike)
+  redirect_to request.referrer
+end
   def new
     @critique = current_user.critiques.build
+    
     respond_with(@critique)
   end
 
@@ -21,15 +27,16 @@ class CritiquesController < ApplicationController
   end
 
   def create
-    @critique = current_user.critiques.build(critique_params)
-    @critique.save
-    respond_with(@critique)
+    @critique = current_user.critiques.create(critique_params)
+   #render params.inspect
+   redirect_to request.referrer
   end
 
   def update
     @critique.update(critique_params)
     respond_with(@critique)
   end
+
 
   def destroy
     @critique.destroy
@@ -42,6 +49,6 @@ class CritiquesController < ApplicationController
     end
 
     def critique_params
-      params.require(:critique).permit(:song, :description, :user_id)
+      params.require(:critique).permit(:description, :user_id,:music_id)
     end
 end

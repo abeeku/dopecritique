@@ -9,6 +9,10 @@
   <strong>Bio:</strong>
   <%= @artist.bio %>
 </p>
+
+<div id="musics_wrapper">
+  <%= render @artist.musics  %>
+
 <h1>Add new music for this artist</h1>
 <p>
 <%= form_for ([@artist,@artist.musics.build]) do |f| %>
@@ -24,6 +28,19 @@
 <%= f.button :submit, class: 'btn' %>
 <% end %>
 </p>
+
+
+<p><%=pluralize(@artist.likers(User).count, "like")%></p>
+<% if user_signed_in?  %>
+  <%if current_user.likes?(@artist) %>
+    <%= link_to 'Unlike',like_artist_path(@artist),method: :post, class: "glyphicon glyphicon-thumbs-up" %>
+  <% else %>
+    <%= link_to 'Like',like_artist_path(@artist),method: :post, class: "glyphicon glyphicon-thumbs-up" %>
+  <% end %>
+<% else %>
+<%= link_to "Sign in to like this song", new_user_session_path %>
+<% end %>
+
 
 <%= link_to 'Edit', edit_artist_path(@artist) %> |
 <%= link_to 'Back', artists_path %>

@@ -2,7 +2,7 @@
 
 <p>
   <strong>Song:</strong>
-  <%= @critique.song %>
+  <%= @critique.music.name %>
 </p>
 
 <p>
@@ -14,6 +14,16 @@
   <strong>User:</strong>
   <%= @critique.user_id %>
 </p>
+<p><%=pluralize(@critique.likers(User).count, "like")%></p>
+<% if user_signed_in?  %>
+	<%if current_user.likes?(@critique) %>
+		<%= link_to 'Unlike',like_critique_path(@critique),method: :post, class: "glyphicon glyphicon-thumbs-up" %>
+	<% else %>
+		<%= link_to 'Like',like_critique_path(@critique),method: :post, class: "glyphicon glyphicon-thumbs-up" %>
+	<% end %>
+<% else %>
+<%= link_to "Sign in to like this song", new_user_session_path %>
+<% end %>
 
 <%= link_to 'Edit', edit_critique_path(@critique) %> |
 <%= link_to 'Back', critiques_path %>

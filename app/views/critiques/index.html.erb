@@ -13,7 +13,7 @@
   <tbody>
     <% @critiques.each do |critique| %>
       <tr>
-        <td><%= critique.song %></td>
+        <td><%= critique.music.name %></td>
         <td><%= critique.description %></td>
         <td><%= critique.user_id %></td>
         <td><%= link_to 'Show', critique %></td>

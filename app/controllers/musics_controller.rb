@@ -1,49 +1,59 @@
 class MusicsController < ApplicationController
 	 respond_to :html, :xml, :json
-	def index
-    @musics = Music.all
-    respond_with(@musics)
-  end
+   before_action :set_artist
+#	def index
+ #   @musics = Music.all
+  #  respond_with(@musics)
+ # end
 
-  def show
-    respond_with(@music)
-  end
+  #def show
+   # respond_with(@music)
+  #end
 
-  def new
-    @music = Music.new
-    respond_with(@music)
-  end
+  #def new
+   # @music = Music.new
+    #respond_with(@music)
+  #end
 
-  def edit
-  end
+  #def edit
+  #end
 
   def create
-    @artist = Artist.find(params[:artist_id])
-    @music = Music.create(music_params)
-    @music.artist_id = @artist.id
-    @music.save
-    respond_with(@music)
+    @music = @artist.musics.create(music_params)
+    redirect_to @artist
   end
 
-  def update
-    @music.update(music_params)
-    respond_with(@music)
-  end
-
+  #def update
+   # @music.update(music_params)
+    #respond_with(@music)
+  #end
+def like
+  @musicToLike = Music.find(params[:id])
+  current_user.toggle_like!(@musicToLike)
+  redirect_to request.referrer
+end
   def destroy
-    @music.destroy
-    respond_with(@music)
+    @music = @artist.musics.find(params[:id])
+    if @music.destroy
+        flash[:success] = "Item deleted"
+      else
+        flash[:error] = "Couldn't delete item"
+        
+    end
+    redirect_to @artist
   end
+
 
   private
     def set_music
       @music = Music.find(params[:id])
     end
+    def set_artist
+      @artist = Artist.find(params[:artist_id])
+    end
 
     def music_params
-      params.require(:music).permit(:user, :bio)
+      params[:music].permit(:name, :link)
     end
-	def like
-
-	end
+	
 end
