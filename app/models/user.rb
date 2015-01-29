@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
                     :access_key_id => ENV['AKIAIBPRHVSOQYLDGMGQ'],
                     :secret_access_key => ENV['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']
                 },
-                :s3_permissions => 'private',
+                :s3_permissions => 'public-read',
                 :url => ":s3_domain_url",
                 :path => "/:class/avatars/:id_:basename.:style.:extension"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
