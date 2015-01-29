@@ -10,12 +10,15 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
+ENV['S3_KEY']='AKIAIBPRHVSOQYLDGMGQ'
+ENV['S3_SECRET']='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'
+ENV['S3_BUCKET']='dopecritiqueassets'
 config.paperclip_defaults = {
   :storage => :s3,
   :s3_credentials => {
-    :bucket => ENV['dopecritiqueassets'],
-    :access_key_id => ENV['AKIAIBPRHVSOQYLDGMGQ'],
-    :secret_access_key => ENV['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']
+    :bucket => ENV['S3_BUCKET'],
+    :access_key_id => ENV['S3_KEY'],
+    :secret_access_key => ENV['S3_SECRET']
   }
 }
 
