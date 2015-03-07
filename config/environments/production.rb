@@ -19,7 +19,10 @@ config.paperclip_defaults = {
     :bucket => ENV['S3_BUCKET'],
     :access_key_id => ENV['S3_KEY'],
     :secret_access_key => ENV['S3_SECRET']
-  }
+  },
+  :s3_permissions => 'public-read',
+                :url => ":s3_domain_url",
+                :path => "/:class/avatars/:id_:basename.:style.:extension"
 }
 
 

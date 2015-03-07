@@ -1,5 +1,7 @@
 <p><%= music.name%></p>
-<p><%= music.link%></p>
+<p><%=link_to (image_tag(music.video_img)), music.link%></p>
+<%= music.video_img %>
+<p><%= music.duration %></p>
 <p><%=pluralize(music.likers(User).count, "like")%></p>
 <% if user_signed_in?  %>
 	<%if current_user.likes?(music) %>
