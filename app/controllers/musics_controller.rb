@@ -1,6 +1,7 @@
 class MusicsController < ApplicationController
 	 respond_to :html, :xml, :json
    before_action :set_artist
+
 #	def index
  #   @musics = Music.all
   #  respond_with(@musics)
@@ -29,7 +30,10 @@ class MusicsController < ApplicationController
   #end
 def like
   @musicToLike = Music.find(params[:id])
-  current_user.toggle_like!(@musicToLike)
+  @musicToLike.liked_by current_user
+ @musicToLike.artist.liked_by current_user
+ @musicToLike.save
+ @musicToLike.artist.save
   redirect_to request.referrer
 end
   def destroy
@@ -48,6 +52,7 @@ end
     def set_music
       @music = Music.find(params[:id])
     end
+
     def set_artist
       @artist = Artist.find(params[:artist_id])
     end

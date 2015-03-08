@@ -5,7 +5,9 @@ class CritiquesController < ApplicationController
 
   def index
     @critiques = Critique.all
-    respond_with(@critiques)
+    @hotArtist = Artist.highest_voted.limit(1).first
+    @top_songs = Music.highest_voted.limit(10)
+respond_with(@critiques)
   end
 
   def show
@@ -14,7 +16,8 @@ class CritiquesController < ApplicationController
 
 def like
   @critiqueToLike = Critique.find(params[:id])
-  current_user.toggle_like!(@critiqueToLike)
+ @critiqueToLike.liked_by current_user
+
   redirect_to request.referrer
 end
   def new
@@ -29,7 +32,7 @@ end
   def create
     @critique = current_user.critiques.create(critique_params)
    #render params.inspect
-   redirect_to request.referrer
+   redirect_to root
   end
 
   def update

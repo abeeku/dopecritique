@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :critiques
-  acts_as_liker
+  #acts_as_liker
+  acts_as_voter
   has_attached_file :avatar, :styles => { :medium => "300x300#", :thumb => "50x50#" }#,
   					#		:storage => :s3,
   					#		:bucket => ENV['dopecritiqueassets'],

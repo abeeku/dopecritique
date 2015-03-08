@@ -14,7 +14,7 @@ class ArtistsController < ApplicationController
 
 def like
   @artistToLike = Artist.find(params[:id])
-  current_user.toggle_like!(@artistToLike)
+  @artistToLike.liked_by current_user
   redirect_to request.referrer
 end
   def new

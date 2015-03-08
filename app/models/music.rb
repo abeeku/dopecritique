@@ -1,9 +1,15 @@
 class Music < ActiveRecord::Base
 	belongs_to :artist
 	has_many :critiques
-	before_save :set_link
 
-	acts_as_likeable
+	before_save :set_link#, :set_favorites
+	acts_as_votable
+	#acts_as_likeable
+	
+attr_accessor :favorites
+	def self.highest_voted
+    self.order("cached_votes_score DESC")
+  end
 
 	def set_link
 		video = VideoInfo.new(self.link)
@@ -16,4 +22,9 @@ class Music < ActiveRecord::Base
 		end
 		
 	end	
+
+	
+	#def set_favorites
+	#	favorites = likes.size
+	#end
 end

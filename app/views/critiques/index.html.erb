@@ -1,28 +1,40 @@
-<h1>Listing critiques</h1>
+<h1>Home</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Song</th>
-      <th>Description</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @critiques.each do |critique| %>
-      <tr>
-        <td><%= critique.music.name %></td>
-        <td><%= critique.description %></td>
-        <td><%= critique.user_id %></td>
-        <td><%= link_to 'Show', critique %></td>
-        <td><%= link_to 'Edit', edit_critique_path(critique) %></td>
-        <td><%= link_to 'Destroy', critique, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div id="topSongsBox">
+  <h1>Top Songs</h1>
+    <ol>
+    <% @top_songs.each do |m| %>
+      <li><%= m.name %></li>
     <% end %>
-  </tbody>
-</table>
+    </ol> 
+</div>
+
+<div id='hotArtistBox' style="border: 1px black dashed">
+<h2><%= @hotArtist.name %></h2>
+<p><%= @hotArtist.bio %></p>
+  <h3><%="Hottest hits" %></h3>
+    <ol>
+    <% @hotArtist.musics.each do |m| %>
+      <li><%= m.name %></li>
+    <% end %>
+    </ol> 
+</div>
+
+
+<div id="critiques">
+ <h1>Critiques</h1>
+
+    <% @critiques.each do |critique| %>
+      <div ckass="crit">
+
+
+        <div class="crit_name"> <%=link_to "#{critique.user.full_name}'s critique for [#{critique.music.name}]  ", critique %></div>
+        <div class="crit_desc"><%= truncate(critique.description,length: 140) %></div>
+       
+       
+      </div>
+    <% end %>
+</div>
 
 <br>
 

@@ -30,15 +30,15 @@
 </p>
 
 
-<p><%=pluralize(@artist.likers(User).count, "like")%></p>
+<p><%=pluralize(@artist.get_likes.size, "favorite")%></p>
 <% if user_signed_in?  %>
-  <%if current_user.likes?(@artist) %>
-    <%= link_to 'Unlike',like_artist_path(@artist),method: :post, class: "glyphicon glyphicon-thumbs-up" %>
+  <%if current_user.voted_for?(@artist) %>
+    <p>You favorited this artist</p>
   <% else %>
-    <%= link_to 'Like',like_artist_path(@artist),method: :post, class: "glyphicon glyphicon-thumbs-up" %>
+    <%= link_to 'Favorite',like_artist_path(@artist),method: :post, class: "glyphicon glyphicon-star" %>
   <% end %>
 <% else %>
-<%= link_to "Sign in to like this song", new_user_session_path %>
+<%= link_to "Sign in to favorite this song", new_user_session_path %>
 <% end %>
 
 

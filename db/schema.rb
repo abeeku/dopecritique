@@ -11,17 +11,69 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129165151) do
+ActiveRecord::Schema.define(version: 20150308003834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: true do |t|
+    t.string   "namespace"
+    t.text     "body"
+    t.string   "resource_id",   null: false
+    t.string   "resource_type", null: false
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+
+  create_table "admin_users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "artists", force: true do |t|
     t.string   "name"
     t.text     "bio"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
+
+  add_index "artists", ["cached_votes_down"], name: "index_artists_on_cached_votes_down", using: :btree
+  add_index "artists", ["cached_votes_score"], name: "index_artists_on_cached_votes_score", using: :btree
+  add_index "artists", ["cached_votes_total"], name: "index_artists_on_cached_votes_total", using: :btree
+  add_index "artists", ["cached_votes_up"], name: "index_artists_on_cached_votes_up", using: :btree
+  add_index "artists", ["cached_weighted_average"], name: "index_artists_on_cached_weighted_average", using: :btree
+  add_index "artists", ["cached_weighted_score"], name: "index_artists_on_cached_weighted_score", using: :btree
+  add_index "artists", ["cached_weighted_total"], name: "index_artists_on_cached_weighted_total", using: :btree
 
   create_table "critiques", force: true do |t|
     t.text     "description"
@@ -29,8 +81,22 @@ ActiveRecord::Schema.define(version: 20150129165151) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "music_id"
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
+  add_index "critiques", ["cached_votes_down"], name: "index_critiques_on_cached_votes_down", using: :btree
+  add_index "critiques", ["cached_votes_score"], name: "index_critiques_on_cached_votes_score", using: :btree
+  add_index "critiques", ["cached_votes_total"], name: "index_critiques_on_cached_votes_total", using: :btree
+  add_index "critiques", ["cached_votes_up"], name: "index_critiques_on_cached_votes_up", using: :btree
+  add_index "critiques", ["cached_weighted_average"], name: "index_critiques_on_cached_weighted_average", using: :btree
+  add_index "critiques", ["cached_weighted_score"], name: "index_critiques_on_cached_weighted_score", using: :btree
+  add_index "critiques", ["cached_weighted_total"], name: "index_critiques_on_cached_weighted_total", using: :btree
   add_index "critiques", ["music_id"], name: "index_critiques_on_music_id", using: :btree
   add_index "critiques", ["user_id"], name: "index_critiques_on_user_id", using: :btree
 
@@ -75,9 +141,24 @@ ActiveRecord::Schema.define(version: 20150129165151) do
     t.integer  "artist_id"
     t.string   "video_img"
     t.string   "duration"
+    t.integer  "favorites"
+    t.integer  "cached_votes_total",      default: 0
+    t.integer  "cached_votes_score",      default: 0
+    t.integer  "cached_votes_up",         default: 0
+    t.integer  "cached_votes_down",       default: 0
+    t.integer  "cached_weighted_score",   default: 0
+    t.integer  "cached_weighted_total",   default: 0
+    t.float    "cached_weighted_average", default: 0.0
   end
 
   add_index "musics", ["artist_id"], name: "index_musics_on_artist_id", using: :btree
+  add_index "musics", ["cached_votes_down"], name: "index_musics_on_cached_votes_down", using: :btree
+  add_index "musics", ["cached_votes_score"], name: "index_musics_on_cached_votes_score", using: :btree
+  add_index "musics", ["cached_votes_total"], name: "index_musics_on_cached_votes_total", using: :btree
+  add_index "musics", ["cached_votes_up"], name: "index_musics_on_cached_votes_up", using: :btree
+  add_index "musics", ["cached_weighted_average"], name: "index_musics_on_cached_weighted_average", using: :btree
+  add_index "musics", ["cached_weighted_score"], name: "index_musics_on_cached_weighted_score", using: :btree
+  add_index "musics", ["cached_weighted_total"], name: "index_musics_on_cached_weighted_total", using: :btree
 
   create_table "rs_evaluations", force: true do |t|
     t.string   "reputation_name"
@@ -150,5 +231,20 @@ ActiveRecord::Schema.define(version: 20150129165151) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "votes", force: true do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end
