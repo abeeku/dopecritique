@@ -1,18 +1,16 @@
-ActiveAdmin.register Artist do
+ActiveAdmin.register Music do
 
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-   permit_params :name, :bio, :avatar, :created_at
+   permit_params :name, :link, :created_at, :artist_id
    index do
      selectable_column
      id_column
      column :name
-     column :bio
-     column :avatar do |p|
-               image_tag(p.avatar.url(:thumb))
-             end
+     column :link
+     column :artist
      
      column :created_at
      actions
@@ -20,10 +18,8 @@ ActiveAdmin.register Artist do
    show do |p|
       attributes_table do
         row :name
-        row :bio
-        row :avatar do
-          image_tag p.avatar.url
-        end
+        row :link
+        
         
         row :created_at
         
@@ -33,16 +29,15 @@ ActiveAdmin.register Artist do
     
     
    filter :name
-   filter :bio
+   filter :link
    filter :created_at
-   
+   filter :artist
 
    form multipart: true do |f|
      f.inputs "Admin Details" do
        f.input :name
-       f.input :bio
-       f.input :avatar
-   #    f.input :category_id, :label => 'Category', :as => :select, :collection => Category.all.map{|c| ["#{c.name}", c.id]}
+       f.input :link
+       f.input :artist_id, :label => 'Artist', :as => :select, :collection => Artist.all.map{|c| ["#{c.name}", c.id]}
      end
      f.actions
    end

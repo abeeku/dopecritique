@@ -5,7 +5,9 @@
 #   gem 'sqlite3'
 #
 development:
-  username: abeeku
+  username: postgres
+  password: password
+  host: localhost
   adapter: postgresql
   database: crit_development
   pool: 5

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails dopecritique: development" uuid="c5a490b0-a119-46df-895c-086728bac458">
+      <user-name>postgres</user-name>
+      <user-password>dfdadfcbdfd9dfd9dfdddfc5dfd8dfce</user-password>
+      <schema-pattern>crit_development.pg_catalog crit_development.public</schema-pattern>
+      <default-schemas>crit_development.pg_catalog crit_development.public</default-schemas>
+    </data-source>
+    <data-source name="Rails dopecritique: test" uuid="71fc1fea-a0dd-4fd1-af5b-eb0c14543427">
+      <schema-pattern>crit__test.pg_catalog crit__test.public</schema-pattern>
+      <default-schemas>crit__test.pg_catalog crit__test.public</default-schemas>
+    </data-source>
+    <data-source name="Rails dopecritique: production" uuid="6d69f5fe-22d4-440c-bfe4-73ce10a95a1f">
+      <first-sync>true</first-sync>
+    </data-source>
+  </component>
+</project>

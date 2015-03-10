@@ -1,18 +1,12 @@
+<div id="container" class='col-md-8'>
 <h1>Home</h1>
 
-<div id="topSongsBox">
-  <h1>Top Songs</h1>
-    <ol>
-    <% @top_songs.each do |m| %>
-      <li><%= m.name %></li>
-    <% end %>
-    </ol> 
-</div>
 
-<div id='hotArtistBox' style="border: 1px black dashed">
-<h2><%= @hotArtist.name %></h2>
-<p><%= @hotArtist.bio %></p>
-  <h3><%="Hottest hits" %></h3>
+
+<div id='hotArtistBox'style="border: 1px black dashed" >
+<h2>Hot Artist - <%=  @hotArtist.name %></h2>
+<%=image_tag(@hotArtist.avatar.url(:medium)) %><p><%= @hotArtist.bio %></p>
+  <h3><%="Hottest Hits" %></h3>
     <ol>
     <% @hotArtist.musics.each do |m| %>
       <li><%= m.name %></li>
@@ -39,3 +33,13 @@
 <br>
 
 <%= link_to 'New Critique', new_critique_path %>
+</div>
+
+<div id="topSongsBox" class='col-md-4' >
+  <h1>Top Songs</h1>
+    <ol>
+    <% @top_songs.each do |m| %>
+      <li><%= m.name %></li>
+    <% end %>
+    </ol> 
+</div>
