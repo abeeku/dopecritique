@@ -3,7 +3,8 @@ class Mixtape < ActiveRecord::Base
 	
 	has_attached_file :file
 	  validates_attachment_content_type :file, :content_type => 
-[ 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3' ] 
+  [ 'audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio' ]
+
  validates_attachment_size :file, :less_than => 101.megabytes 
 	scope :coming_soon, -> {where("released_at >=",Date.today)}
 end
