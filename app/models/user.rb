@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :critiques
   #acts_as_liker
   acts_as_voter
+  has_many :mixtapes
   acts_as_follower
   acts_as_followable
   has_attached_file :avatar, :styles => { :medium => "300x300#", :thumb => "50x50#" }#,

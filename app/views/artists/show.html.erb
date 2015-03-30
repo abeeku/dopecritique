@@ -7,7 +7,8 @@
 </script>
 <p id="notice"><%= notice %></p>
 <div id="artistInfo" style ="
-<%= "border: 3px solid blue;" if current_user.following?(@artist) %>
+
+<%= "border: 3px solid blue;" if current_user && current_user.following?(@artist) %>
 ">
 <p>
 
