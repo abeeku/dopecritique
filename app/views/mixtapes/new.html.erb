@@ -1,0 +1,17 @@
+<h1>New Mixtape</h1>
+
+<%= form_for @mixtape, :html => {multipart: :true} do |f| %>
+  
+ <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+ 
+    <%= f.label :file,"Mp3" %>
+    <%= f.file_field :file %>
+    <%= f.hidden_field :user_id,value: current_user.id %>
+</div>
+  <div class="actions">
+    <%= f.submit "Upload" %>
+  </div>
+<% end %>

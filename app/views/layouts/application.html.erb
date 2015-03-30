@@ -16,8 +16,11 @@
 			<li><%=link_to "Music", "#"%></li>
 			<li><%=link_to "Artists", artists_path%></li>
 			<li><%=link_to "Critics", '#'%></li>
-			
+			<li><%=link_to "Mixtapes", mixtapes_path%></li>
 
+			<% if user_signed_in? %>
+           <li><%=link_to "Add a Mixtape", new_mixtape_path%></li>
+           <% end %>
 		</ul>
 		<ul class ="nav navbar-nav  nav-pills navbar-right">
 	<% if user_signed_in? %>

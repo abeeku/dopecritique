@@ -58,7 +58,7 @@ end
     end
 
     def music_params
-      params[:music].permit(:name, :link)
+      params[:music].permit(:name, :link,:link_type)
     end
 	
 end

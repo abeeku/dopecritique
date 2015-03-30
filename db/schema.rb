@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308003834) do
+ActiveRecord::Schema.define(version: 20150330210024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 20150308003834) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "albums", force: true do |t|
+    t.string   "name"
+    t.integer  "artist_id"
+    t.datetime "released_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "albums", ["artist_id"], name: "index_albums_on_artist_id", using: :btree
 
   create_table "artists", force: true do |t|
     t.string   "name"
@@ -101,11 +111,13 @@ ActiveRecord::Schema.define(version: 20150308003834) do
   add_index "critiques", ["user_id"], name: "index_critiques_on_user_id", using: :btree
 
   create_table "follows", force: true do |t|
-    t.string   "follower_type"
-    t.integer  "follower_id"
-    t.string   "followable_type"
-    t.integer  "followable_id"
+    t.integer  "followable_id",                   null: false
+    t.string   "followable_type",                 null: false
+    t.integer  "follower_id",                     null: false
+    t.string   "follower_type",                   null: false
+    t.boolean  "blocked",         default: false, null: false
     t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
@@ -133,6 +145,20 @@ ActiveRecord::Schema.define(version: 20150308003834) do
   add_index "mentions", ["mentionable_id", "mentionable_type"], name: "fk_mentionables", using: :btree
   add_index "mentions", ["mentioner_id", "mentioner_type"], name: "fk_mentions", using: :btree
 
+  create_table "mixtapes", force: true do |t|
+    t.string   "name"
+    t.datetime "released_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "mixtapes", ["user_id"], name: "index_mixtapes_on_user_id", using: :btree
+
   create_table "musics", force: true do |t|
     t.string   "name"
     t.string   "link"
@@ -149,8 +175,13 @@ ActiveRecord::Schema.define(version: 20150308003834) do
     t.integer  "cached_weighted_score",   default: 0
     t.integer  "cached_weighted_total",   default: 0
     t.float    "cached_weighted_average", default: 0.0
+    t.integer  "mixtape_id"
+    t.integer  "album_id"
+    t.datetime "released_at"
+    t.string   "link_type"
   end
 
+  add_index "musics", ["album_id"], name: "index_musics_on_album_id", using: :btree
   add_index "musics", ["artist_id"], name: "index_musics_on_artist_id", using: :btree
   add_index "musics", ["cached_votes_down"], name: "index_musics_on_cached_votes_down", using: :btree
   add_index "musics", ["cached_votes_score"], name: "index_musics_on_cached_votes_score", using: :btree
@@ -159,6 +190,7 @@ ActiveRecord::Schema.define(version: 20150308003834) do
   add_index "musics", ["cached_weighted_average"], name: "index_musics_on_cached_weighted_average", using: :btree
   add_index "musics", ["cached_weighted_score"], name: "index_musics_on_cached_weighted_score", using: :btree
   add_index "musics", ["cached_weighted_total"], name: "index_musics_on_cached_weighted_total", using: :btree
+  add_index "musics", ["mixtape_id"], name: "index_musics_on_mixtape_id", using: :btree
 
   create_table "rs_evaluations", force: true do |t|
     t.string   "reputation_name"
@@ -226,6 +258,7 @@ ActiveRecord::Schema.define(version: 20150308003834) do
     t.string   "full_name"
     t.string   "username"
     t.text     "bio"
+    t.boolean  "artist"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

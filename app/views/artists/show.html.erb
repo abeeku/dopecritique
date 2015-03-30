@@ -1,15 +1,29 @@
+<script type="text/javascript">
+    function showlink() {
+      
+    $('#thisLink').show();
+   
+    }
+</script>
 <p id="notice"><%= notice %></p>
-
+<div id="artistInfo" style ="
+<%= "border: 3px solid blue;" if current_user.following?(@artist) %>
+">
 <p>
-  <strong>Name:</strong>
+
   <%= @artist.name %>
+<% if user_signed_in? %>
+  <div id="follow_artist">
+    <%= render :partial => "shared/follow_user", :locals => {:artist => @artist} %>
+  </div>
+<% end %>
 </p>
 
 <p>
   <strong>Bio:</strong>
   <%= @artist.bio %>
 </p>
-
+</div>
 <div id="musics_wrapper">
   <%= render @artist.musics  %>
 
@@ -20,10 +34,22 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
+  
+
+  <p>
+ <%= f.radio_button :link_type, 'youtube' %> 
+  <%= f.label :link_type, image_tag("youtube.png"), :value => 'youtube', onclick: 'showlink();' %>
+ <%= f.radio_button :link_type, 'spotify' %> 
+  <%= f.label :link_type, image_tag("spotify.png"), :value => 'spotify', onclick: 'showlink();' %>
+ <%= f.radio_button :link_type, 'itunes' %> 
+  <%= f.label :link_type, image_tag("itunes.png"), :value => 'itunes', onclick: 'showlink();' %>
+  <div id="thisLink" style="display:none">
     <%= f.label :link %><br>
     <%= f.text_area :link %>
   </div>
+  </p>
+
+
  <%# f.hidden_field :artist_id, @artist.id %>
 <%= f.button :submit, class: 'btn' %>
 <% end %>

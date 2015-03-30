@@ -1,11 +1,13 @@
 class Music < ActiveRecord::Base
 	belongs_to :artist
 	has_many :critiques
-
+	belongs_to :album
+	belongs_to :mixtape
 	before_save :set_link#, :set_favorites
 	acts_as_votable
 	#acts_as_likeable
-	
+scope :coming_soon, -> {where("released_at >=",Date.today)}
+
 attr_accessor :favorites
 	def self.highest_voted
     self.order("cached_votes_score DESC")
