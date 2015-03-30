@@ -5,11 +5,27 @@
 <h2>Critiques</h2>
  <% @user.critiques.each do |critique| %>
       <tr>
-        <td><%= critique.song %></td>
+        <td><%= critique.music.name %></td>
         <td><%= critique.description %></td>
-        <td><%= critique.user_id %></td>
         <td><%= link_to 'Show', critique %></td>
-        <td><%= link_to 'Edit', edit_critique_path(critique) %></td>
-        <td><%= link_to 'Destroy', critique, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_critique_path(critique)  if user_signed_in? && current_user==@user %></td>
+        <td><%= link_to 'Destroy', critique, method: :delete, data: { confirm: 'Are you sure?' } if user_signed_in? && current_user==@user%></td>
       </tr>
     <% end %>
+
+
+  <h1>Mixtapes</h1>
+  
+  <% @user.mixtapes.each do |m| %>
+  	  <tr>
+        <td><%= m.name %></td>
+        <td><%= link_to 'Download', m.file.url %></td>
+       
+        <td><%= link_to 'Destroy', critique, method: :delete, data: { confirm: 'Are you sure?' } if user_signed_in? && current_user==@user%></td>
+      </tr>
+  <% end %>  
+<% if user_signed_in? && current_user==@user %>
+ <h3><%=link_to "Upload a Mixtape", new_mixtape_path  %></h3>
+    <h2>New critique</h2>
+    <%= render 'critiques/form'%>
+<% end %>

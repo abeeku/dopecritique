@@ -1,10 +1,10 @@
-<%= form_for(@critique) do |f| %>
-  <% if @critique.errors.any? %>
+<%= form_for(Critique.new) do |f| %>
+  <% if Critique.new.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@critique.errors.count, "error") %> prohibited this critique from being saved:</h2>
+      <h2><%= pluralize(Critique.new.errors.count, "error") %> prohibited this critique from being saved:</h2>
 
       <ul>
-      <% @critique.errors.full_messages.each do |message| %>
+      <% Critique.new.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
