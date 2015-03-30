@@ -3,7 +3,8 @@ class Music < ActiveRecord::Base
 	has_many :critiques
 	belongs_to :album
 	belongs_to :mixtape
-	before_save :set_link#, :set_favorites
+	before_create :set_link#, :set_favorites
+	validates_presence_of :link
 	acts_as_votable
 	#acts_as_likeable
 scope :coming_soon, -> {where("released_at >=",Date.today)}
