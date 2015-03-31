@@ -11,8 +11,8 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @critique.user_id %>
+  <strong>Added by: </strong>
+  <%= @critique.user.full_name %>
 </p>
 <p><%=pluralize(@critique.votes_for.size, "favorite")%></p>
 <% if user_signed_in?  %>

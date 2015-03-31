@@ -8,9 +8,9 @@
 </head>
 <body>
 
-	<div class="nav navbar navbar-inverse">
+	<div class="nav navbar navbar-custom">
 		<div class="navbar-brand">
-			<%= link_to "2 Dope Critique",root_path %>
+			<%= link_to "2 Dope Critiques",root_path, style: "color:white;font-weight:bold;text-decoration:none" %>
 		</div>
 		<ul class ="nav navbar-nav  nav-pills navbar-left">
 			<li><%=link_to "Import Music from Spotify", "#"%></li>
@@ -29,7 +29,7 @@
 		
 			<li><%=link_to "New Critique", new_critique_path%></li>
 
-			<li><%=image_tag current_user.avatar.url(:thumb), class: "inline"%><%=link_to "#{current_user.full_name}'s Profile", profile_path(current_user), class: "inline"%></li>
+			<li><%=image_tag current_user.avatar.url(:thumb), class: "inline", style: "width:50px;height:50px;"%><%=link_to "#{current_user.full_name}'s Profile", profile_path(current_user), class: "inline navimg"%></li>
 			<li><%=link_to "Account", edit_user_registration_path%></li>
 			<li><%=link_to "Log Out", destroy_user_session_path, method: :delete%></li>
 
@@ -43,8 +43,8 @@
 <% flash.each do |name, msg| %>
 	<%= content_tag :div, msg, class: "alert alert-info" %>
 <% end %>
-<div id="container">
+<section class="container">
 <%= yield %>
-</div>
+</section>
 </body>
 </html>
