@@ -14,13 +14,12 @@
 		</div>
 		<ul class ="nav navbar-nav  nav-pills navbar-left">
 			<li><%=link_to "Import Music from Spotify", "#"%></li>
-			<li><%=link_to "Artists", artists_path%></li>
-			<li><%=link_to "Critics", '#'%></li>
+			<li><%link_to "Artists", artists_path%></li>
 
 			<li><%=link_to "Mixtapes", mixtapes_path%></li>
 
 			<% if user_signed_in? %>
-			<li><%=link_to "Add a Critique", new_critique_path%></li>
+			
            <li><%=link_to "Add a Mixtape", new_mixtape_path%></li>
            <% end %>
 		</ul>
