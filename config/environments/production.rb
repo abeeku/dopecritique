@@ -25,7 +25,21 @@ config.paperclip_defaults = {
                 :path => "/:class/avatars/:id_:basename.:style.:extension"
 }
 
+  config.app_domain = 'dopecritiques.heroku.com'
 
+  # Email
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: config.app_domain }
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com', 
+    port: '587',
+    enable_starttls_auto: true,
+    user_name: 'someuser',
+    password: 'somepass',
+    authentication: :plain,
+    domain: 'dopecritiques.heroku.com'
+  }
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true

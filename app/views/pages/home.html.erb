@@ -1,5 +1,5 @@
 <div id="sidebar">
-<div id="topSongsBox"  >
+<div id="topSongsBox">
   <h1>Top Songs</h1>
     <ol>
     <% @top_songs.each do |m| %>
@@ -24,43 +24,32 @@
   proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </div>
 
-<div id="publicAct">
-  <h2>Public Activity</h2>
-  <%# @activities.inspect %>
-    <% @activities.each do |activity| %>
-  <div class="activity">
 
-  <%= ActivityPresenter.new(activity, self.render_activity) %>
-    <%= link_to (image_tag activity.owner.avatar.url(:thumb)),activity.owner %>
-  <%= link_to activity.owner.full_name, activity.owner if activity.owner %>
-  added comment to <%= link_to activity.trackable.music.name, activity.trackable %>
+
   </div>
-<% end %>
-  </div>
+</div>
+</div>
 </div>
 <div id="content">
 <h1>Home</h1>
+<h2>Public Activity</h2>
+  <%# @activities.inspect %>
+    <% @activities.each do |activity| %>
 
-
-
-<div id='hotArtistBox'style="border: 1px black dashed" >
-<h2>Hot Artist - <%=  @hotArtist.name %></h2>
-<%=image_tag(@hotArtist.avatar.url(:medium)) %><p><%= @hotArtist.bio %></p>
-  <h3><%="Hottest Hits" %></h3>
-    <ol>
-    <% @hotArtist.musics.each do |m| %>
-      <li><%= m.name %></li>
-    <% end %>
-    </ol> 
+    <div class="activity-container">      
+              
+   <div class="activity-thumb"><%= link_to (image_tag activity.owner.avatar.url(:thumb)),activity.owner %></div>
+   <div class="post-title"><%="#{activity.owner.full_name} added a new critique for #{activity.trackable.music.name}"%></div>
+   
 </div>
-<div id="comingSoon">
-  <h2>Coming soon</h2>
-  <h3>Albums</h3>
-  <div class='soonBox'>
+
+ 
+  <%# ActivityPresenter.new(activity, self).render_activity %>
     
-  </div>
-</div>
-
+  <%# link_to activity.owner.full_name, activity.owner if activity.owner %>
+   <%# link_to activity.trackable.music.name, activity.trackable %>
+  
+<% end %>
 <div id="critiques">
  <h1>Critiques</h1>
 
