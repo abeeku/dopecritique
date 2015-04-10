@@ -37,7 +37,7 @@ def destroy
 
     def user_params
       accessible = [ :name, :email, :avatar, :picture] # extend with your own params
-      accessible << [ :password, :password_confirmation,  :] unless params[:user][:password].blank?
+      accessible << [ :password, :password_confirmation] unless params[:user][:password].blank?
       params.require(:user).permit(accessible)
     end
 end
