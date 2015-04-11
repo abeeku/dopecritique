@@ -1,2 +1,5 @@
 
 <h2><%=link_to @mixtape.name, @mixtape.file.url %></h2>
+<section id="audio">
+<%= link_to "HTML Audio", @mixtape.file.url, :class=>"html5" %>
+</section>
