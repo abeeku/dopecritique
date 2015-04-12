@@ -1,8 +1,10 @@
 <% content_for :head do %>
   <%= javascript_include_tag 'mixtapes.js.coffee' %>
+  
+
 <% end %>
 <h2><%=link_to @mixtape.name, @mixtape.file.url %></h2>
-<script type="text/javascript">
+<!--<script type="text/javascript">
 $(document).ready(function() {
 
     var audioSection = $('section#audio');
@@ -21,8 +23,27 @@ $(document).ready(function() {
     });
 });
 
-</script>
+</script>-->
 
+
+
+
+<%=link_to "Stream Me", @mixtape.file.url, :class=>"html5 btn btn-info" %><section id="audio">
+
+</section>
+
+<% if user_signed_in? %>
+<p>Averate rating</p>
+<div id="star"></div>
+
+<p>Your rating</p>
+<div id="user_star"></div>
+
+<% else %>
+<p>Sign in to see ratings</p>
+<% end %>
+
+ <%= javascript_include_tag 'jquery.raty' %>
 <script type="text/javascript">
   $('#star').raty({
     readOnly: true,
@@ -42,17 +63,3 @@ $(document).ready(function() {
     }
   });
 </script>
-<%=link_to "Stream Me", @mixtape.file.url, :class=>"html5 btn btn-info" %><section id="audio">
-
-</section>
-
-<% if user_signed_in %>
-<p>Averate rating</p>
-<div id="star"></div>
-
-<p>Your rating</p>
-<div id="user_star"></div>
-
-<% else %>
-<p>Sign in to see ratings</p>
-<% end %>

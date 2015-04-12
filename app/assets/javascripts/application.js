@@ -11,12 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require raty.min.js
-//= require bootstrap-sprockets
-
+//= require bootstrap/dropdown
+//= require jquery.raty.min
 $(document).ready(function() {
 
     var audioSection = $('section#audio');
