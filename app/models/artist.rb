@@ -1,5 +1,6 @@
 class Artist < ActiveRecord::Base
 	has_many :musics
+	has_many :ratings
 	#acts_as_likeable
 	acts_as_followable
 	acts_as_votable

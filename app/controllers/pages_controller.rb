@@ -9,4 +9,8 @@ class PagesController < ApplicationController
     @soonMixes = Mixtape.coming_soon.limit(10)
 
   end
+
+  def import_from_spotify
+  	
+  end
 end

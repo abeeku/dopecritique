@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 root 'pages#home'
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
-
+resources :ratings, only: :update
 resources :mixtapes
 resources :critiques do
     member {post :like}
@@ -25,7 +25,7 @@ delete 'artists/unfollow/:artist_id' => 'followers#destroy', :as => "unfollow_ar
   match 'artists/follow/:artist_id' => 'followers#create', :as => "follow_artist", via: [:get, :post]
   get '/search', to: 'music#search'
 
-  
+  get '/import_spotifty' => 'pages#import_from_spotify'
   get '/:id', :to => "users#show", as: 'profile'
   
   

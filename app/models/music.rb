@@ -1,6 +1,7 @@
 class Music < ActiveRecord::Base
 	belongs_to :artist
 	has_many :critiques
+	has_many :ratings
 	belongs_to :album
 	#belongs_to :mixtape
 	before_create :set_link#, :set_favorites

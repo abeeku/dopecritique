@@ -4,7 +4,7 @@
   <title>2 Dope critique</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
+ <%= javascript_include_tag :defaults, 'data-turbolinks-track' => true %>
 <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" %>
   <link href='http://fonts.googleapis.com/css?family=Bevan' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
@@ -16,7 +16,7 @@
 			<%= link_to "Word is Bond",root_path, style: "font-family:Bevan;color:white;font-weight:bold;text-decoration:none" %>
 		</div>
 		<ul class ="nav navbar-nav  nav-pills navbar-left">
-			<li><%=link_to "Import Music from Spotify", "#"%></li>
+			<li><%=link_to "Import Music from Spotify", "pages#import_from_spotify"%></li>
 			<li><%=link_to "Artists", artists_path%></li>
 			<li><%=link_to "Critiques", critiques_path%></li>
 

@@ -1,5 +1,58 @@
-
+<% content_for :head do %>
+  <%= javascript_include_tag 'mixtapes.js.coffee' %>
+<% end %>
 <h2><%=link_to @mixtape.name, @mixtape.file.url %></h2>
-<section id="audio">
-<%= link_to "HTML Audio", @mixtape.file.url, :class=>"html5" %>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    var audioSection = $('section#audio');
+    $('a.html5').click(function(e) {
+        
+        e.preventDefault();
+        var audio = $('<audio>', {
+             controls : 'controls',
+             autoplay : 'autoplay'
+        });
+ 
+        var url = $(this).attr('href');
+        $('<source>').attr('src', url).appendTo(audio);
+        audioSection.html(audio);
+        return false;
+    });
+});
+
+</script>
+
+<script type="text/javascript">
+  $('#star').raty({
+    readOnly: true,
+    score: <%= @mixtape.average_rating %>,
+    path: '/assets'
+  });
+
+  $('#user_star').raty({
+    score: <%= @rating.score %>,
+    path: '/assets',
+    click: function(score, evt) {
+      $.ajax({
+        url: '/ratings/' + <%= @rating.id %>,
+        type: 'PATCH',
+        data: { score: score }
+      });
+    }
+  });
+</script>
+<%=link_to "Stream Me", @mixtape.file.url, :class=>"html5 btn btn-info" %><section id="audio">
+
 </section>
+
+<% if user_signed_in %>
+<p>Averate rating</p>
+<div id="star"></div>
+
+<p>Your rating</p>
+<div id="user_star"></div>
+
+<% else %>
+<p>Sign in to see ratings</p>
+<% end %>

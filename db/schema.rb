@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406190749) do
+ActiveRecord::Schema.define(version: 20150412193104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -218,6 +218,21 @@ ActiveRecord::Schema.define(version: 20150406190749) do
   add_index "musics", ["cached_weighted_score"], name: "index_musics_on_cached_weighted_score", using: :btree
   add_index "musics", ["cached_weighted_total"], name: "index_musics_on_cached_weighted_total", using: :btree
   add_index "musics", ["mixtape_id"], name: "index_musics_on_mixtape_id", using: :btree
+
+  create_table "ratings", force: true do |t|
+    t.integer  "mixtape_id"
+    t.integer  "music_id"
+    t.integer  "user_id"
+    t.integer  "score",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "artist_id"
+  end
+
+  add_index "ratings", ["artist_id"], name: "index_ratings_on_artist_id", using: :btree
+  add_index "ratings", ["mixtape_id"], name: "index_ratings_on_mixtape_id", using: :btree
+  add_index "ratings", ["music_id"], name: "index_ratings_on_music_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
   create_table "rs_evaluations", force: true do |t|
     t.string   "reputation_name"

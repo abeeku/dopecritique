@@ -17,6 +17,12 @@ class MixtapesController < ApplicationController
 
   def show
   		@mixtape = Mixtape.find(params[:id])
+      if user_signed_in?
+      @rating = Rating.where(mixtape_id: @mixtape.id, user_id: current_user.id).first 
+      unless @rating
+       @rating = Rating.create(mixtape_id: @mixtape.id, user_id: current_user.id, score: 0) 
+     end
+   end
   end
   def destroy 
   	@mixtape = Mixtape.find(params[:id])

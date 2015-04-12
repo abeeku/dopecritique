@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mixtape_id: 
+  music_id: 
+  user_id: 
+  score: 
+  0: MyString
+
+two:
+  mixtape_id: 
+  music_id: 
+  user_id: 
+  score: 
+  0: MyString

@@ -1,7 +1,8 @@
 $(document).ready(function() {
     var audioSection = $('section#audio');
-    $('a.html5').click(function() {
- 
+    $('a.html5').click(function(e) {
+        alert();
+        e.preventDefault();
         var audio = $('<audio>', {
              controls : 'controls'
         });
