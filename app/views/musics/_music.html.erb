@@ -15,3 +15,25 @@
 <% end %>
 
 <%= link_to "Delete", artist_music_path(@artist, music.id),method: :delete,data: {confirm: "Are you sure?" } %>
+
+
+<% if user_signed_in? %>
+
+<p>Your rating</p>
+<div id="music_<%= music.id%>_rating"></div>
+<%# get_rating(music).id %>
+<script type="text/javascript">
+  
+  $('#music_<%= music.id %>_rating').raty({
+    score: <%= @rating.score %>,
+    path: '/assets',
+    click: function(score, evt) {
+      $.ajax({
+        url: '/ratings/' + <%= get_rating(music).id %>,
+        type: 'PATCH',
+        data: { score: score }
+      });
+    }
+  });
+</script>
+<% end %>

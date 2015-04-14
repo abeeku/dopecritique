@@ -5,7 +5,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 before_action :configure_permitted_parameters, if: :devise_controller?
 
-
+def get_rating(m)
+    Rating.where(music_id: m.id, user_id: current_user.id).first if Rating.where(music_id: m.id, user_id: current_user.id).first
+    Rating.create(music_id: m.id, user_id: current_user.id, score: 0)
+  end
 
   def ensure_signup_complete
     # Ensure we don't go into an infinite loop

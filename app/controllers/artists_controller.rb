@@ -17,6 +17,19 @@ class ArtistsController < ApplicationController
   end
   def show
    # @artist = Artist.find(params[:id])
+    if user_signed_in?
+      @rating = Rating.where(artist_id: @artist.id, user_id: current_user.id).first 
+     # @music_ratings = @artist.musics.map {
+      #  |m| get_rating(m)
+
+     # }
+
+
+  
+      unless @rating
+       @rating = Rating.create(artist_id: @artist.id, user_id: current_user.id, score: 0) 
+     end
+   end
   respond_with(@artist)
   end
 

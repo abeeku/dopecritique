@@ -20,13 +20,94 @@
 <% end %>
 </p>
 
-<p>
+<!--<p>
   <strong>Bio:</strong>
   <%= @artist.bio %>
 </p>
+-->
+
+<h3>User ratings</h3>
+
+
+<% if user_signed_in? %>
+<p>Averate rating</p>
+<div id="star"></div>
+
+<p>Your rating</p>
+<div id="user_star"></div>
+
+<% else %>
+<p>Sign in to see ratings</p>
+<% end %>
+
+ <%= javascript_include_tag 'jquery.raty' %>
+<script type="text/javascript">
+  $('#star').raty({
+    readOnly: true,
+    score: <%= @artist.average_rating %>,
+    path: '/assets'
+  });
+
+  $('#user_star').raty({
+    score: <%= @rating.score %>,
+    path: '/assets',
+    click: function(score, evt) {
+      $.ajax({
+        url: '/ratings/' + <%= @rating.id %>,
+        type: 'PATCH',
+        data: { score: score }
+      });
+    }
+  });
+</script>
+
+
 </div>
 <div id="musics_wrapper">
-  <%= render @artist.musics  %>
+
+  <% @artist.musics.each do |music| %>
+  <p><%= music.name%></p>
+<p><%=link_to (image_tag(music.video_img)), music.link%></p>
+<%= music.video_img %>
+<p><%= music.duration %></p>
+<p><%=pluralize(music.votes_for.size, "favorites")%></p>
+<% if user_signed_in?  %>
+  <%if current_user.voted_on?(music) %>
+    <p>You favorited this artist</p>
+    
+  <% else %>
+    <%= link_to 'Favorite',like_artist_music_path(@artist,music),method: :post, class: "glyphicon glyphicon-star" %>
+  <% end %>
+<% else %>
+<%= link_to "Sign in to like this song", new_user_session_path %>
+<% end %>
+
+<%= link_to "Delete", artist_music_path(@artist, music.id),method: :delete,data: {confirm: "Are you sure?" } %>
+
+
+<% if user_signed_in? %>
+
+<p>Your rating</p>
+<div id="music_<%= music.id%>_rating"></div>
+<%# get_rating(music).id %>
+<script type="text/javascript">
+  
+  $('#music_<%= music.id %>_rating').raty({
+    score: <%= @rating.score %>,
+    path: '/assets',
+    click: function(score, evt) {
+      $.ajax({
+        url: '/ratings/' + <%= get_rating(music).id %>,
+        type: 'PATCH',
+        data: { score: score,music_id:<%= music.id %> }
+      });
+    }
+  });
+</script>
+<% end %>
+
+  <% end %>
+  <%# render @artist.musics  %>
 
 <h1>Add new music for this artist</h1>
 <p>

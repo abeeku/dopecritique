@@ -1,10 +1,20 @@
 
-$('#star').raty({
-  readOnly: true,
-  score: <%= @mixtape.average_rating %>,
-  path: '/assets'
-});
+<% if @music %>
+  $('#music_<%= @music.id %>_rating').raty({
+    score: <%= get_rating(@music).score %>,
+    path: '/assets',
+    click: function(score, evt) {
+      $.ajax({
+        url: '/ratings/' + <%= get_rating(@music).id %>,
+        type: 'PATCH',
+        data: { score: score }
+      });
+    }
+  });
 
+
+
+<% else %>
 $('#user_star').raty({
   score: <%= @rating.score %>,
   path: '/assets',
@@ -16,3 +26,5 @@ $('#user_star').raty({
     }).done(function (data){});
   }
 });
+
+<% end %>
