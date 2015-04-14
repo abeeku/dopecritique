@@ -15,6 +15,13 @@
 
 
 <% else %>
+
+ $('#star').raty({
+    readOnly: true,
+    score: <%= @artist.average_rating if @artist %><%= @mixtape.average_rating if @mixtape %>,
+    path: '/assets'
+  });
+
 $('#user_star').raty({
   score: <%= @rating.score %>,
   path: '/assets',

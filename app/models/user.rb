@@ -25,7 +25,8 @@ class User < ActiveRecord::Base
             #    :path => "/:class/avatars/:id_:basename.:style.:extension"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   validates_presence_of :full_name
-   def self.find_for_oauth(auth, signed_in_resource = nil)
+   
+   def find_for_oauth(auth, signed_in_resource = nil)
 
     # Get the identity and user if they exist
     identity = Identity.find_for_oauth(auth)

@@ -10,8 +10,8 @@ class RatingsController < ApplicationController
       respond_to do |format|
        
         format.js {
-        	 echo params[:music_id]
-        	# @music = Music.find(id: params[:music_id]).first if params[:music_id]
+        	 
+        	 @music = Music.find(id: params[:music_id]).first if params[:music_id]
         	 #render :parial => "update"
         }
 
