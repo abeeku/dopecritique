@@ -4,7 +4,7 @@ class MixtapesController < ApplicationController
   end
 
   def create
-  	@mixtape = Mixtape.create(mixtape_params)
+  	@mixtape = Mixtape.create(mixtape_params,user_id: current_user.id)
   	if @mixtape.save 
     	redirect_to mixtape_path(@mixtape)
     else
