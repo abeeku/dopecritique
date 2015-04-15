@@ -31,10 +31,7 @@ attr_accessor :favorites
 		ratings.sum(:score)/ratings.size 
 	end
 
-	def get_rating
-		Rating.where(music_id: self.id, user_id: current_user.id).first if Rating.where(music_id: self.id, user_id: current_user.id).first
-		Rating.create(music_id: self.id, user_id: current_user.id, score: 0)
-	end
+	
 	#def set_favorites
 	#	favorites = likes.size
 	#end

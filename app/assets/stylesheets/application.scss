@@ -10,8 +10,10 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- * require_tree .
+
+ *= stub active_admin
  *= require_self
+ *= require_directory .
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -21,6 +23,20 @@
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
     
+}
+
+.crit_desc {
+  min-height: 60px;
+  min-width: 180px;
+  border: 1px dashed #ccc;
+}
+body {
+background-color: #4b0082;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+background-size: 100% auto;
 }
 
 .post-title {
@@ -49,9 +65,11 @@
     }
 
 h1,h2,h3 {
-  font-family: FiraSans;
+  font-family: "Cabin";
   font-weight:bold;
-  color: #4b0082;
+  // text-transform: uppercase;
+  color: #373E44;
+  font-size: 20px;
 }
 #sidebar {
 	float: right;
@@ -116,6 +134,7 @@ body {
 
 div.hidden { display: none; }
 
+/*
 .navbar-custom {
   background-color: #4b0082;
   border-color: #380061;
@@ -230,6 +249,8 @@ div.hidden { display: none; }
 .navbar-custom .navbar-link:hover {
   color: #b0aa12;
 }
+
+*/
 
 /**
  * Button Object
@@ -616,4 +637,288 @@ div.hidden { display: none; }
 
 .btn-yahoo.large:before {
     background-position: -216px -22px;
+}
+/*
+.navbar-nav > li > a {
+  color:yellow;
+}
+
+.navbar {
+background-color: #0C7975;
+border-radius: 6px;
+padding: 6px;
+}
+.navbar-nav > li > a {
+  border-radius: 4px;
+}
+.navbar-nav > li > a:hover {
+  background-color:rgb(25, 122, 216);;
+
+}*/
+
+.navbar
+.brand {
+    display:block;
+    float:left;
+    padding:0
+}
+
+.navbar
+.brand:hover {
+    text-decoration:none
+}
+
+.navbar-inner {
+    padding-right:0;
+    padding-left:0;
+    -webkit-border-radius:0;
+    -moz-border-radius:0;
+    border-radius:0;
+    background-color:#E6E6E6;
+    background-repeat:repeat-x;
+    *zoom:1
+}
+
+.navbar-inner:before,.navbar-inner:after {
+    display:table;
+    content:"";
+    line-height:0
+}
+
+.navbar-inner:after {
+    clear:both
+}
+
+.navbar
+.container {
+    width:940px
+}
+
+.navbar
+.nav {
+    position:relative;
+    left:0;
+    display:block;
+    float:right;
+    margin:0
+}
+
+.navbar
+.nav>li {
+    float:left
+}
+
+.navbar .nav>li>a {
+    float:none;
+    padding:20px 15px;
+    text-decoration:none;
+    letter-spacing:.05em;
+    font-weight:500;
+    font-size:13px;
+    line-height:20px;
+    text-transform:uppercase
+}
+
+.navbar
+.nav .dropdown-toggle .caret {
+    margin-top:8px
+}
+
+.navbar
+.nav>li>a:focus,.navbar
+.nav>li>a:hover {
+    background-color:transparent;
+    color:#4E555E;
+    text-decoration:none
+}
+
+.navbar
+.btn-navbar {
+    display:none;
+    float:right;
+    margin:15px 5px;
+    padding:9px 10px
+}
+
+.navbar .btn-navbar:hover,.navbar
+.btn-navbar:active {
+    background-color:#222324;
+    color:#fff;
+    *background-color:#151617
+}
+
+.navbar
+.btn-navbar:active {
+    background-color:#09090a \9
+}
+
+.navbar .btn-navbar
+.icon-bar {
+    display:block;
+    width:18px;
+    height:2px;
+    -webkit-border-radius:1px;
+    -moz-border-radius:1px;
+    border-radius:1px;
+    background-color:#6d7477
+}
+
+.btn-navbar
+.icon-bar+.icon-bar {
+    margin-top:3px
+}
+
+.nav>li>ul.dropdown-menu {
+    background-color:#E9E9E9;
+    font-size:12px
+}
+
+.nav>li>ul.dropdown-menu
+li>a {
+    font-weight:500;
+    color:#919599
+}
+
+.nav>li>ul.dropdown-menu
+li>a:hover,.nav>li>ul.dropdown-menu
+li>a:focus {
+    background-color:#FF6B45;
+    color:#fff;
+    text-decoration:none
+}
+
+.navbar
+.nav li.dropdown>a:hover
+.caret {
+    border-top-color:#555;
+    border-bottom-color:#555
+}
+
+.navbar .nav
+li.dropdown>.dropdown-toggle
+.caret {
+    border-top-color:#777;
+    border-bottom-color:#777
+}
+
+.navbar
+.nav>li>.dropdown-menu.pull-right {
+    right:0;
+    left:auto
+}
+
+.navbar
+.nav>li>.dropdown-menu.pull-right:before {
+    right:12px;
+    left:auto
+}
+
+.navbar
+.nav>li>.dropdown-menu.pull-right:after {
+    right:13px;
+    left:auto
+}
+
+.navbar
+.brand,.navbar .nav>li>a {
+    color:#64686D
+}
+
+.navbar .nav
+li.dropdown.open>.dropdown-toggle,.navbar .nav
+li.dropdown.active>.dropdown-toggle,.navbar .nav
+li.dropdown.open.active>.dropdown-toggle {
+    background-color:#D8D8D8;
+    color:#4E555E
+}
+
+.navbar
+.nav li.dropdown>a:hover
+.caret {
+    border-top-color:#fff;
+    border-bottom-color:#fff
+}
+
+.navbar .nav
+li.dropdown>.dropdown-toggle
+.caret {
+    border-top-color:#919599;
+    border-bottom-color:#919599
+}
+
+.navbar
+.btn-navbar {
+    background-color:transparent;
+    -webkit-box-shadow:none;
+    -moz-box-shadow:none;
+    box-shadow:none
+}
+
+.navbar
+.btn-navbar:hover,.navbar
+.btn-navbar:active {
+    background-color:#D8D8D8;
+    color:#fff;
+    *background-color:#D8D8D8
+}
+
+.navbar
+.btn-navbar:active {
+    background-color:#2F363D \9
+}
+
+.brand {
+    overflow:hidden;
+    width:190px;
+    height:60px;
+    background:url(../img/logo.png) no-repeat left bottom;
+    text-indent:-9000px
+}
+
+.brand
+h1 {
+    margin:0
+}
+
+.dark-brand {
+    display:block;
+    overflow:hidden;
+    padding:0;
+    width:78px;
+    height:40px;
+    background:url(../img/dark-logo.png) no-repeat;
+    text-indent:-9000px
+}
+
+.brand:hover,.dark-brand:hover {
+    opacity:.9;
+    -ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+    filter:alpha(opacity=90)
+}
+.navbar .brand, .navbar .nav>li>a {
+color: #64686D;
+}
+
+.navbar .nav>li>a {
+float: none;
+padding: 20px 15px;
+text-decoration: none;
+letter-spacing: .05em;
+font-weight: 500;
+font-size: 13px;
+line-height: 20px;
+text-transform: uppercase;
+}
+
+.navbar {
+  background-color: #E6E6E6;
+  border-radius: 0px;
+}
+body {
+  background-color: #F7F7F7;
+color: #505459;
+}
+
+.navbar-brand {
+  padding: 20px 15px;
 }

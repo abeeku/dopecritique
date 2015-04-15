@@ -14,7 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+
 //= require bootstrap/dropdown
 //= require jquery.raty.min
 $(document).ready(function() {

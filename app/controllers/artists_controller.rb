@@ -4,7 +4,13 @@ class ArtistsController < ApplicationController
   respond_to :html
 
   def index
-    @artists = Artist.all
+
+    if params[:tag]
+         @artists = Artist.tagged_with(params[:tag])
+    else
+         @artists = Artist.all   
+    end
+   
     respond_with(@artists)
   end
 

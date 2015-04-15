@@ -9,6 +9,7 @@ root 'pages#home'
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 resources :ratings, only: :update
 resources :mixtapes
+get 'tags/:tag', to: 'artist#index', as: :tag
 resources :critiques do
     member {post :like}
   end
